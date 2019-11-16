@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
         toggleBeam(false);
 
         // This will be used when I can manipulate scenes
-        //rb2D.velocity = Vector2.right * speed;
+        rb2D.velocity = Vector2.right * speed;
     }
 
     // Update is called once per frame
