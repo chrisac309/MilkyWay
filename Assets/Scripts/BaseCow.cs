@@ -7,7 +7,7 @@ public class BaseCow : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Rigidbody2D rb2D;
-    private float deathTimer = 5.0f;
+    private float deathTimer = 3.0f;
     // Use this for initialization
     void Awake () 
     {

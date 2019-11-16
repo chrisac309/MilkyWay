@@ -23,13 +23,13 @@ public class PlayerController : MonoBehaviour {
         coll2D = GetComponent<Collider2D>();
         toggleBeam(false);
 
-        // This will be used when I can manipulate scenes
         rb2D.velocity = Vector2.right * speed;
     }
 
     // Update is called once per frame
     void Update () {
         checkUserInput();
+        rb2D.velocity = Vector2.right * speed;
     }
 
     
