@@ -5,7 +5,9 @@ public class GameManager : MonoBehaviour
     public GameObject LevelPrefab;
     private GameObject[] prefabArray;
     private Transform cameraTransform;
-    private float referencePosition;
+    private int nextPrefabPosition = 0;
+    private int prefabArrayLength = 5;
+    public float referencePosition;
     private float shiftDistance;
     private float cameraWidth;
 
@@ -25,11 +27,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        referencePosition = cameraTransform.position.x;
+        var currentCameraPos = cameraTransform.position.x;
+        if(referencePosition + cameraWidth < currentCameraPos) {
+            shiftNextPrefab();
+            referencePosition = currentCameraPos;
+            nextPrefabPosition++;
+            if (nextPrefabPosition >= prefabArrayLength) {
+                nextPrefabPosition = 0;
+            }
+        }
     }
 
     private void initializePrefabArray() {
-        prefabArray = new GameObject[5];
+        prefabArray = new GameObject[prefabArrayLength];
         prefabArray[0] = Instantiate(LevelPrefab, new Vector3(0, 0), Quaternion.identity);
         prefabArray[1] = Instantiate(LevelPrefab, new Vector3(cameraWidth, 0), Quaternion.identity);
         prefabArray[2] = Instantiate(LevelPrefab, new Vector3(cameraWidth * 2, 0), Quaternion.identity);
@@ -37,9 +47,9 @@ public class GameManager : MonoBehaviour
         prefabArray[4] = Instantiate(LevelPrefab, new Vector3(cameraWidth * 4, 0), Quaternion.identity);
     }
 
-    private void shiftPrefabAt(int position) {
-        var pos = prefabArray[position].transform.position;
+    private void shiftNextPrefab() {
+        var pos = prefabArray[nextPrefabPosition].transform.position;
         var shift = pos.x + 5 * cameraWidth;
-        prefabArray[position].transform.position = new Vector3(shift, pos.y);
+        prefabArray[nextPrefabPosition].transform.position = new Vector3(shift, pos.y);
     }
 }

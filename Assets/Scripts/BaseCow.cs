@@ -7,7 +7,7 @@ public class BaseCow : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Rigidbody2D rb2D;
-    private float deathTimer = 3.0f;
+
     // Use this for initialization
     void Awake () 
     {
@@ -30,8 +30,7 @@ public class BaseCow : MonoBehaviour
     }
 
     void Update() {
-        deathTimer -= Time.deltaTime;
-        if (deathTimer < 0.0f) {
+        if(rb2D.velocity.y < -0.1) {
             Destroy(this);
         }
     }
